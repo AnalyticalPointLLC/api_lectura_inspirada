@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: api-lectura
+    restart: always
+    ports:
+      - "8169:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:  # Añadir esta sección para configurar la zona horaria
+      - TZ=America/Lima  # Reemplaza con tu zona horaria deseada
+  
