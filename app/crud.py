@@ -861,6 +861,9 @@ def get_book_with_discounted_price(db: Session, book_id: int):
         percent_discount = 12
         discounted_price = original_price_numeric * (1 - (percent_discount / 100))
         
+        # Redondear el precio con descuento a dos decimales
+        discounted_price = round(discounted_price, 2)
+        
         # Devolver datos del libro junto con el precio con descuento
         book_dict = book.__dict__.copy()
         book_dict['discounted_price'] = discounted_price
