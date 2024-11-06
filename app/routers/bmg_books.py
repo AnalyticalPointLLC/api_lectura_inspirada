@@ -472,7 +472,7 @@ def get_books_by_classification_prefix_and_language(prefix: str, language: str, 
 
 
 
-## CODIGO PARA EL DESCUENTO
+## CODIGO PARA EL DESCUENTO 10 unidades
 @router.get("/discounted_price/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID")
 def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
     try:
@@ -495,6 +495,52 @@ def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
         logging.error(f"Error general al obtener el precio con descuento: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
     
+## CODIGO PARA EL DESCUENTO 100 cien unidades
+@router.get("/discounted_price/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID")
+def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
+    try:
+        book = crud.get_book_with_discounted_price_100_cien_unidades(db, book_id)
+        if not book:
+            raise HTTPException(status_code=404, detail="Book not found")
+        
+        return {
+            "id": book['id'],
+            "titulo": book['titulo'],
+            "percentaje_descuento": book['percent_discount'],
+            "precio_original": book['pvp'],
+            "precio_con_descuento": book['discounted_price']
+        }
+    
+    except SQLAlchemyError as e:
+        logging.error(f"Error en SQLAlchemy al obtener el precio con descuento: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+    except Exception as e:
+        logging.error(f"Error general al obtener el precio con descuento: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+    
+    
+## CODIGO PARA EL DESCUENTO 1000 MIL unidades
+@router.get("/discounted_price/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID")
+def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
+    try:
+        book = crud.get_book_with_discounted_price_1000_mil_unidades(db, book_id)
+        if not book:
+            raise HTTPException(status_code=404, detail="Book not found")
+        
+        return {
+            "id": book['id'],
+            "titulo": book['titulo'],
+            "percentaje_descuento": book['percent_discount'],
+            "precio_original": book['pvp'],
+            "precio_con_descuento": book['discounted_price']
+        }
+    
+    except SQLAlchemyError as e:
+        logging.error(f"Error en SQLAlchemy al obtener el precio con descuento: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+    except Exception as e:
+        logging.error(f"Error general al obtener el precio con descuento: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
     
     
     

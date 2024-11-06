@@ -876,3 +876,87 @@ def get_book_with_discounted_price(db: Session, book_id: int):
     except Exception as e:
         logging.error(f"Error inesperado en get_book_with_discounted_price: {str(e)}")
         return None
+    
+    
+    
+def get_book_with_discounted_price_100_cien_unidades(db: Session, book_id: int):
+    try:
+        query = db.query(models.BmgBook).filter(models.BmgBook.id == book_id)
+        log_query(query)
+        
+        book = query.one_or_none()
+        
+        if not book:
+            return None
+        
+        # Asegúrate de que el campo pvp sea convertible a número
+        original_price = book.pvp
+        if original_price is None:
+            raise ValueError("El campo pvp está vacío o es nulo")
+        
+        try:
+            original_price_numeric = float(original_price)
+        except ValueError:
+            raise ValueError("El campo pvp no es un número válido")
+        
+        # Calcular el precio con descuento 17%
+        percent_discount = 17
+        discounted_price = original_price_numeric * (1 - (percent_discount / 100))
+        
+        # Redondear el precio con descuento a dos decimales
+        discounted_price = round(discounted_price, 2)
+        
+        # Devolver datos del libro junto con el precio con descuento
+        book_dict = book.__dict__.copy()
+        book_dict['discounted_price'] = discounted_price
+        book_dict['percent_discount'] = percent_discount
+        return book_dict
+
+    except SQLAlchemyError as e:
+        logging.error(f"Error en get_book_with_discounted_price: {str(e)}")
+        return None
+    except Exception as e:
+        logging.error(f"Error inesperado en get_book_with_discounted_price: {str(e)}")
+        return None
+    
+    
+    
+def get_book_with_discounted_price_1000_mil_unidades(db: Session, book_id: int):
+    try:
+        query = db.query(models.BmgBook).filter(models.BmgBook.id == book_id)
+        log_query(query)
+        
+        book = query.one_or_none()
+        
+        if not book:
+            return None
+        
+        # Asegúrate de que el campo pvp sea convertible a número
+        original_price = book.pvp
+        if original_price is None:
+            raise ValueError("El campo pvp está vacío o es nulo")
+        
+        try:
+            original_price_numeric = float(original_price)
+        except ValueError:
+            raise ValueError("El campo pvp no es un número válido")
+        
+        # Calcular el precio con descuento 22%
+        percent_discount = 22
+        discounted_price = original_price_numeric * (1 - (percent_discount / 100))
+        
+        # Redondear el precio con descuento a dos decimales
+        discounted_price = round(discounted_price, 2)
+        
+        # Devolver datos del libro junto con el precio con descuento
+        book_dict = book.__dict__.copy()
+        book_dict['discounted_price'] = discounted_price
+        book_dict['percent_discount'] = percent_discount
+        return book_dict
+
+    except SQLAlchemyError as e:
+        logging.error(f"Error en get_book_with_discounted_price: {str(e)}")
+        return None
+    except Exception as e:
+        logging.error(f"Error inesperado en get_book_with_discounted_price: {str(e)}")
+        return None
