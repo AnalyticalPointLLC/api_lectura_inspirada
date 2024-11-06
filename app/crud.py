@@ -864,10 +864,40 @@ def get_book_with_discounted_price(db: Session, book_id: int):
         # Redondear el precio con descuento a dos decimales
         discounted_price = round(discounted_price, 2)
         
+        #========================================================#
+        
+        # Calcular el precio con descuento x 100u 17%
+        percent_discount_100 = 17
+        discounted_price_100 = original_price_numeric * (1 - (percent_discount_100 / 100))
+        
+        # Redondear el precio con descuento a dos decimales
+        discounted_price_100 = round(discounted_price_100, 2)
+        
+        #========================================================#
+        
+        # Calcular el precio con descuento x 1000u 22%
+        percent_discount_1000 = 22
+        discounted_price_1000 = original_price_numeric * (1 - (percent_discount_1000 / 100))
+        
+        # Redondear el precio con descuento a dos decimales
+        discounted_price_1000 = round(discounted_price_1000, 2)
+        
+        
+        
+        #========================================================#
+        
+        
+        
         # Devolver datos del libro junto con el precio con descuento
         book_dict = book.__dict__.copy()
         book_dict['discounted_price'] = discounted_price
         book_dict['percent_discount'] = percent_discount
+        
+        book_dict['discounted_price_100'] = discounted_price_100
+        book_dict['percent_discount_100'] = percent_discount_100
+        
+        book_dict['discounted_price_1000'] = discounted_price_1000
+        book_dict['percent_discount_1000'] = percent_discount_1000
         return book_dict
 
     except SQLAlchemyError as e:

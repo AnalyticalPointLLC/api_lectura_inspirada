@@ -483,9 +483,15 @@ def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
         return {
             "id": book['id'],
             "titulo": book['titulo'],
+            "precio_original": book['pvp'],
             "percentaje_descuento": book['percent_discount'],
-            "precio_original": book['pvp'],
-            "precio_con_descuento": book['discounted_price']
+            "precio_con_descuento": book['discounted_price'],
+            
+            "percentaje_descuento_100": book['percent_discount_100'],
+            "precio_con_descuento_100": book['discounted_price_100'],
+            
+            "percentaje_descuento_1000": book['percent_discount_1000'],
+            "precio_con_descuento_1000": book['discounted_price_1000']
         }
     
     except SQLAlchemyError as e:
@@ -495,52 +501,8 @@ def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
         logging.error(f"Error general al obtener el precio con descuento: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
     
-## CODIGO PARA EL DESCUENTO 100 cien unidades
-@router.get("/discounted_price_100_cien/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID 100 units")
-def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
-    try:
-        book = crud.get_book_with_discounted_price_100_cien_unidades(db, book_id)
-        if not book:
-            raise HTTPException(status_code=404, detail="Book not found")
-        
-        return {
-            "id": book['id'],
-            "titulo": book['titulo'],
-            "percentaje_descuento_100": book['percent_discount'],
-            "precio_original": book['pvp'],
-            "precio_con_descuento_100": book['discounted_price']
-        }
-    
-    except SQLAlchemyError as e:
-        logging.error(f"Error en SQLAlchemy al obtener el precio con descuento: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
-    except Exception as e:
-        logging.error(f"Error general al obtener el precio con descuento: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
-    
-    
-## CODIGO PARA EL DESCUENTO 1000 MIL unidades
-@router.get("/discounted_price_1000_mil/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID 1000 units")
-def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
-    try:
-        book = crud.get_book_with_discounted_price_1000_mil_unidades(db, book_id)
-        if not book:
-            raise HTTPException(status_code=404, detail="Book not found")
-        
-        return {
-            "id": book['id'],
-            "titulo": book['titulo'],
-            "percentaje_descuento_1000": book['percent_discount'],
-            "precio_original": book['pvp'],
-            "precio_con_descuento_1000": book['discounted_price']
-        }
-    
-    except SQLAlchemyError as e:
-        logging.error(f"Error en SQLAlchemy al obtener el precio con descuento: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
-    except Exception as e:
-        logging.error(f"Error general al obtener el precio con descuento: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+
     
     
     
