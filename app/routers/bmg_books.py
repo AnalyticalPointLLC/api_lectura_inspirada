@@ -483,9 +483,9 @@ def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
         return {
             "id": book['id'],
             "titulo": book['titulo'],
-            "percentaje_descuento": book['percent_discount_compra_minimo_10_unidades'],
+            "percentaje_descuento": book['percent_discount'],
             "precio_original": book['pvp'],
-            "precio_con_descuento": book['discounted_price_compra_minimo_10_unidades']
+            "precio_con_descuento": book['discounted_price']
         }
     
     except SQLAlchemyError as e:
@@ -506,9 +506,9 @@ def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
         return {
             "id": book['id'],
             "titulo": book['titulo'],
-            "percentaje_descuento": book['percent_discount_compra_minimo_100_unidades'],
+            "percentaje_descuento": book['percent_discount'],
             "precio_original": book['pvp'],
-            "precio_con_descuento": book['discounted_price_compra_minimo_100_unidades']
+            "precio_con_descuento": book['discounted_price']
         }
     
     except SQLAlchemyError as e:
@@ -530,9 +530,9 @@ def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
         return {
             "id": book['id'],
             "titulo": book['titulo'],
-            "percentaje_descuento": book['percent_discount_compra_minimo_1000_unidades'],
+            "percentaje_descuento": book['percent_discount'],
             "precio_original": book['pvp'],
-            "precio_con_descuento": book['discounted_price_compra_minimo_1000_unidades']
+            "precio_con_descuento": book['discounted_price']
         }
     
     except SQLAlchemyError as e:
