@@ -473,7 +473,7 @@ def get_books_by_classification_prefix_and_language(prefix: str, language: str, 
 
 
 ## CODIGO PARA EL DESCUENTO 10 unidades
-@router.get("/discounted_price/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID")
+@router.get("/discounted_price/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID 10 units")
 def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
     try:
         book = crud.get_book_with_discounted_price(db, book_id)
@@ -496,7 +496,7 @@ def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail="Internal Server Error")
     
 ## CODIGO PARA EL DESCUENTO 100 cien unidades
-@router.get("/discounted_price/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID")
+@router.get("/discounted_price_100_cien/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID 100 units")
 def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
     try:
         book = crud.get_book_with_discounted_price_100_cien_unidades(db, book_id)
@@ -520,7 +520,7 @@ def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
     
     
 ## CODIGO PARA EL DESCUENTO 1000 MIL unidades
-@router.get("/discounted_price/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID")
+@router.get("/discounted_price_1000_mil/{book_id}", tags=["Books"], description="Get Discounted Price by Book ID 1000 units")
 def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
     try:
         book = crud.get_book_with_discounted_price_1000_mil_unidades(db, book_id)
