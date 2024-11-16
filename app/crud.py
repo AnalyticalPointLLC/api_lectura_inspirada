@@ -903,8 +903,8 @@ def get_book_with_discounted_price(db: Session, book_id: int):
         book_dict['discounted_price'] = discounted_price
         book_dict['percent_discount'] = percent_discount
         
-        book_dict['discounted_price'] = discounted_price_9
-        book_dict['percent_discount'] = percent_discount_9
+        book_dict['discounted_price_9'] = discounted_price_9
+        book_dict['percent_discount_9'] = percent_discount_9
         
         book_dict['discounted_price_100'] = discounted_price_100
         book_dict['percent_discount_100'] = percent_discount_100
