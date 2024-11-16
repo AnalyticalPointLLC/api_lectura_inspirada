@@ -484,6 +484,10 @@ def get_discounted_price(book_id: int, db: Session = Depends(get_db)):
             "id": book['id'],
             "titulo": book['titulo'],
             "precio_original": book['pvp'],
+            
+            "percentaje_descuento_9": book['percent_discount_9'],
+            "precio_con_descuento_9": book['discounted_price_9'],
+            
             "percentaje_descuento": book['percent_discount'],
             "precio_con_descuento": book['discounted_price'],
             

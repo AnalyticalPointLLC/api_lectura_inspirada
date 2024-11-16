@@ -883,6 +883,16 @@ def get_book_with_discounted_price(db: Session, book_id: int):
         discounted_price_1000 = round(discounted_price_1000, 2)
         
         
+        #========================================================#
+        
+        # Calcular el precio con descuento x 9u 7%
+        percent_discount_9 = 7
+        discounted_price_9 = original_price_numeric * (1 - (percent_discount_9 / 100))
+        
+        # Redondear el precio con descuento a dos decimales
+        discounted_price_9 = round(discounted_price_9, 2)
+        
+        
         
         #========================================================#
         
@@ -892,6 +902,9 @@ def get_book_with_discounted_price(db: Session, book_id: int):
         book_dict = book.__dict__.copy()
         book_dict['discounted_price'] = discounted_price
         book_dict['percent_discount'] = percent_discount
+        
+        book_dict['discounted_price'] = discounted_price_9
+        book_dict['percent_discount'] = percent_discount_9
         
         book_dict['discounted_price_100'] = discounted_price_100
         book_dict['percent_discount_100'] = percent_discount_100
